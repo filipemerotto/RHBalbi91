@@ -1,32 +1,30 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>WebODM - Modelo 3D (Tiles)</title>
+  <title>Visualizador 3D - RHBalbi91</title>
   <script src="https://cesium.com/downloads/cesiumjs/releases/1.114/Build/Cesium/Cesium.js"></script>
   <link href="https://cesium.com/downloads/cesiumjs/releases/1.114/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
   <style>
     html, body, #cesiumContainer {
       width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden;
     }
-    .cesium-viewer-toolbar { z-index: 1; }
   </style>
 </head>
 <body>
   <div id="cesiumContainer"></div>
   <script>
-    window.CESIUM_BASE_URL = "https://cesium.com/downloads/cesiumjs/releases/1.114/Build/Cesium/";
     const viewer = new Cesium.Viewer("cesiumContainer", {
-      timeline: false,
-      animation: false,
-      baseLayerPicker: true,
-      terrainProvider: Cesium.createWorldTerrain()
+      terrainProvider: Cesium.createWorldTerrain(),
+      baseLayerPicker: false
     });
 
-    viewer.scene.primitives.add(new Cesium.Cesium3DTileset({
-      url: "tileset.json"
-    }));
+    const tileset = new Cesium.Cesium3DTileset({
+      url: "./tileset.json"
+    });
+
+    viewer.scene.primitives.add(tileset);
+    viewer.zoomTo(tileset);
   </script>
 </body>
 </html>
